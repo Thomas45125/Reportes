@@ -1,0 +1,73 @@
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import java.time.LocalDateTime;
+
+public class ReportTest {
+
+    private Report report;
+
+    @BeforeEach
+    public void setUp() {
+        report = new Report();
+        report.setIdReporte("123");
+        report.setIdUsuario("user123");
+        report.setIdReportado("user456");
+        report.setIdPublicacion("post789");
+        report.setFechaReporte(LocalDateTime.now());
+        report.setMotivo("Contenido inapropiado");
+        report.setEstadoReporte("pendiente");
+        report.setComentariosAdicionales("Comentario adicional del reporte");
+    }
+
+    @Test
+    public void testGettersAndSetters() {
+        assertEquals("123", report.getIdReporte());
+        assertEquals("user123", report.getIdUsuario());
+        assertEquals("user456", report.getIdReportado());
+        assertEquals("post789", report.getIdPublicacion());
+        assertNotNull(report.getFechaReporte());
+        assertEquals("Contenido inapropiado", report.getMotivo());
+        assertEquals("pendiente", report.getEstadoReporte());
+        assertEquals("Comentario adicional del reporte", report.getComentariosAdicionales());
+    }
+
+    @Test
+    public void testSetters() {
+        
+        report.setIdReporte("987");
+        report.setIdUsuario("user987");
+        report.setIdReportado("user654");
+        report.setIdPublicacion("post321");
+        report.setFechaReporte(LocalDateTime.of(2024, 11, 14, 10, 0));
+        report.setMotivo("Spam");
+        report.setEstadoReporte("revisado");
+        report.setComentariosAdicionales("Comentarios actualizados");
+
+        assertEquals("987", report.getIdReporte());
+        assertEquals("user987", report.getIdUsuario());
+        assertEquals("user654", report.getIdReportado());
+        assertEquals("post321", report.getIdPublicacion());
+        assertEquals(LocalDateTime.of(2024, 11, 14, 10, 0), report.getFechaReporte());
+        assertEquals("Spam", report.getMotivo());
+        assertEquals("revisado", report.getEstadoReporte());
+        assertEquals("Comentarios actualizados", report.getComentariosAdicionales());
+    }
+
+    @Test
+    public void testReportCreation() {
+        Report newReport = new Report();
+        newReport.setIdReporte("789");
+        newReport.setIdUsuario("user789");
+        newReport.setIdReportado("user321");
+        newReport.setIdPublicacion("post654");
+        newReport.setFechaReporte(LocalDateTime.now());
+        newReport.setMotivo("Contenido ofensivo");
+        newReport.setEstadoReporte("pendiente");
+        newReport.setComentariosAdicionales("Se revisará el contenido.");
+
+        assertNotNull(newReport);
+        assertEquals("789", newReport.getIdReporte());
+        assertEquals("user789", newReport.getIdUsuario());
+    }
+}
