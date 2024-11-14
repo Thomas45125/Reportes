@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Reportes</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <h1>Reportes</h1>
+
+    <table id="reportTable">
+        <thead>
+            <tr>
+                <th>ID del Reporte</th>
+                <th>ID del Usuario</th>
+                <th>ID del Reportado</th>
+                <th>ID de la Publicación</th>
+                <th>Fecha del Reporte</th>
+                <th>Motivo</th>
+                <th>Estado del Reporte</th>
+                <th>Comentarios Adicionales</th>
+            </tr>
+        </thead>
+        <tbody id="reportTableBody">
+            <!-- Los datos de los reportes se insertarán aquí dinámicamente -->
+        </tbody>
+    </table>
+
+    <script>
+        // Ejemplo de cómo podrías cargar los reportes desde el backend
+        async function fetchReports() {
+            try {
+                const response = await fetch("http://localhost:8080/api/reports");
+                const reports = await response.json();
+                
+                const tableBody = document.getElementById("reportTableBody");
+                tableBody.innerHTML = ""; // Limpiar tabla
+
+                reports.forEach(report => {
+                    const row = document.createElement("tr");
+
+                    row.innerHTML = `
+                        <td>${report.idReporte}</td>
+                        <td>${report.idUsuario}</td>
+                        <td>${report.idReportado}</td>
+                        <td>${report.idPublicacion}</td>
+                        <td>${report.fechaReporte}</td>
+                        <td>${report.motivo}</td>
+                        <td>${report.estadoReporte}</td>
+                        <td>${report.comentariosAdicionales}</td>
+                    `;
+
+                    tableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error("Error al cargar los reportes:", error);
+            }
+        }
+
+        // Llama a la función para cargar los reportes cuando se carga la página
+        document.addEventListener("DOMContentLoaded", fetchReports);
+    </script>
+</body>
+</html>
